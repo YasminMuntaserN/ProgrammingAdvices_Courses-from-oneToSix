@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            printResult(isPrime(readNumber()));
+        }
+        static int readNumber()
+        {
+            Console.Write("Please Enter a Number: ");
+            int number = int.Parse(Console.ReadLine());
+            return number;
+        }
+        static bool isPrime(int number)
+        {
+            if (number == 1 || number == 2) return true;
+
+            for (int i = 2; i < number; i++)
+                if (number % i == 0) return false;
+
+            return true;
+        }
+        static void printResult(bool isPrime)
+        {
+            if (isPrime) Console.WriteLine("Prime");
+            else Console.WriteLine("Not Prime");
+        }
+        
+    }
+}
+//****************** Another Solution *******************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            printNumberType(readPositiveNumber("Please Enter a Positive Number: "));
+        }
+        enum enPrimeNotPrime { Prime, NotPrim };
+        static int readPositiveNumber(string message)
+        {
+            int number = 0;
+            do
+            {
+                Console.Write(message);
+                number = int.Parse(Console.ReadLine());
+            } while (number <= 0);
+
+            return number;
+        }
+        static enPrimeNotPrime checkPrime(int number)
+        {
+            double m = Math.Round((double)number / 2);
+
+            for (int i = 2; i <= m; i++)
+                if (number % i == 0)
+                    return enPrimeNotPrime.NotPrim;
+
+            return enPrimeNotPrime.Prime;
+        }
+        static void printNumberType(int number)
+        {
+            if (checkPrime(number) == enPrimeNotPrime.Prime) Console.WriteLine("The Number is Prime");
+            else Console.WriteLine("The Number is Not Prime");
+        }
+
+    }
+}

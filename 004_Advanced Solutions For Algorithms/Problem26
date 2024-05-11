@@ -1,0 +1,92 @@
+//With for Loop:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            printNumbers(readNumber());
+        }
+        static int readNumber()
+        {
+            Console.Write("Please Enter The Number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            return number;
+        }
+        static void printNumbers(int number)
+        {
+            for (int i = 1; i <= number; i++)
+                Console.WriteLine(i);
+        }
+    }
+}
+
+//********************************************
+//With While loop:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            printNumbers(readNumber());
+        }
+        static int readNumber()
+        {
+            Console.Write("Please Enter The Number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            return number;
+        }
+        static void printNumbers(int number)
+        {
+            int i = 1;
+            while (i <= number)
+            {
+                Console.WriteLine(i);
+                i++;
+            }
+        }
+    }
+}
+//********************************************
+//With Do While loop:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            printNumbers(readNumber());
+        }
+        static int readNumber()
+        {
+            Console.Write("Please Enter The Number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            return number;
+        }
+        static void printNumbers(int number)
+        {
+            int i = 1;
+            do
+            {
+                Console.WriteLine(i);
+                i++;
+            } while (i <= number);
+        }
+    }
+}

@@ -1,0 +1,848 @@
+// ************************  Lesson 09 - Ternary Operator_Short Hand IF ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int number = readNumber("Please Enter a Number: ");
+
+            Console.WriteLine(number > 0 ? "Positive" : "Negative");
+
+            string result = number > 0 ? "Positive" : number < 0 ? "Negative" : "Zero";
+
+            Console.WriteLine(result);
+        }
+        static int readNumber(string message)
+        {
+            Console.Write(message);
+            return int.Parse(Console.ReadLine());
+        }
+    }
+}
+
+
+// ************************  Lesson 11 - Validate Number ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Your Number is {0}",readValidNumber());
+        }
+        static int readValidNumber()
+        {
+            string number = "";
+
+            do
+            {
+                number = readUserInput();
+            }
+            while (!isValidNumber(number));
+
+            return int.Parse(number);
+        }
+        static string readUserInput()
+        {
+            Console.Write("Please Enter a Valid Number: ");
+            return Console.ReadLine();
+        }
+
+        static bool isValidNumber(string userInput)
+        {
+            int value;
+            if (int.TryParse(userInput, out value))
+                return true;
+
+            return false;
+        }
+    }
+}
+// ************************  Lesson 19 - Recursion ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //printNumbersDown(10, 5);
+            Console.WriteLine(myPower(2, 4));
+        }
+        static void printNumbersDown(int from, int to)
+        {
+            if (from >= to)
+            {
+                Console.WriteLine(from);
+                printNumbersDown(from - 1, to);
+            }
+        }
+        static int myPower(int from, int to)
+        {
+            if (to == 0)
+                return 1;
+            else
+            {
+                return (from * myPower(from, to - 1));
+            }
+        }
+    }
+}
+// ************************  Lesson 27-Two Dimensional Arrays ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            printMultiDimArray(generateMultiPlicationTable());
+        }
+        static int[][] generateMultiPlicationTable()
+        {
+            int[] CalculateMultTable = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            int[][] table = new int[10][];
+
+            for (int i = 0; i < 10; i++)
+            {
+                table[i] = new int[10];
+                for (int j = 0; j < 10; j++)
+                {
+
+                    table[i][j] = CalculateMultTable[j] * (i + 1);
+                }
+
+            }
+
+            return table;
+        }
+        static void printMultiDimArray(int [][] arr)
+        {
+            for(int i=0; i < 10; i++)
+            {
+                foreach (int j in arr[i])
+                {
+                    Console.Write(j.ToString().PadLeft(2,'0') + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+// ************************  Lesson 29-Add Elements To List ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> lst = new List<int>();
+            readList(ref lst);
+            printList(ref lst);
+        }
+        static void readList(ref List<int> lst)
+        {
+            int counter = 0;
+            Console.WriteLine("Please Fill List Elements: ");
+
+            do
+            {
+                counter++;
+                Console.Write("Please Enter Element {0}: ", counter);
+                lst.Add(int.Parse(Console.ReadLine()));
+            } while (readMoreNumbers());
+        }
+        static bool readMoreNumbers()
+        {
+            char readMore = 'N';
+
+            Console.Write("Do You Want To Read More Numbers? Y/N: ");
+            readMore = char.Parse(Console.ReadLine());
+
+            return readMore == 'Y' || readMore == 'y' ? true : false;
+        }
+        static void printList(ref List<int> lst)
+        {
+            Console.WriteLine("List Elements are: ");
+            foreach (int number in lst)
+                Console.Write(number.ToString() + " ");
+
+            Console.WriteLine();
+        }
+
+    }
+}
+// ************************  Lesson 30 - Vector of Structure ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<stEmployees> employeesList = new List<stEmployees>();
+
+            fillEmployeesList(ref employeesList);
+            printEmployeesList(ref employeesList);
+        }
+        struct stEmployees
+        {
+            public string firstName, lastName;
+            public double salary;
+        }
+        static void fillEmployeesList(ref List<stEmployees> lst)
+        {
+            stEmployees tempEmployee = new stEmployees();
+            tempEmployee.firstName = "Saleem";
+            tempEmployee.lastName = "Kassab";
+            tempEmployee.salary = 3000;
+            lst.Add(tempEmployee);
+
+            tempEmployee.firstName = "Kareem";
+            tempEmployee.lastName = "Kassab";
+            tempEmployee.salary = 300;
+            lst.Add(tempEmployee);
+
+            tempEmployee.firstName = "Nassem";
+            tempEmployee.lastName = "Kassab";
+            tempEmployee.salary = 200;
+            lst.Add(tempEmployee);
+        }
+        static void printEmployeesList(ref List<stEmployees> lst)
+        {
+            Console.WriteLine("Employees List:");
+            Console.WriteLine();
+
+            foreach (stEmployees emp in lst)
+            {
+                Console.WriteLine("First Name: {0}", emp.firstName);
+                Console.WriteLine("Last Name: {0}", emp.lastName);
+                Console.WriteLine("Salary: {0}", emp.salary);
+                Console.WriteLine();
+            }
+        }
+    }
+}
+// ************************  Lesson35_What is Pointer ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            unsafe
+            {
+                int a = 20;
+                int* ptr = &a;
+                Console.WriteLine((int)ptr);
+                Console.WriteLine((int)&a);
+            }           
+        }
+    }
+}
+// ************************  Lesson36_Dereferencing Pointer ***********************
+// ************************  Lesson38_Pointers vs References ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            unsafe
+            {
+                int a = 10;
+                Console.WriteLine((int)&a);
+
+                int* ptr = &a;
+                Console.WriteLine((int)ptr);
+
+                int b = 5;
+                Console.WriteLine((int)&b);
+                ptr = &b;
+                Console.WriteLine((int)ptr);
+            }
+
+        }
+    }
+}
+// ************************  Lesson39_Call by Reference Using pointers ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 1, b = 2;
+            Console.WriteLine("Before swapping");
+            Console.WriteLine("a = {0}", a);
+            Console.WriteLine("b = {0}", b);
+            unsafe
+            {
+                swap(&a, &b);
+            }
+            Console.WriteLine("After swapping");
+            Console.WriteLine("a = {0}", a);
+            Console.WriteLine("b = {0}", b);
+        }
+        unsafe
+        static void swap(int* n1, int* n2)
+        {
+            int temp;
+
+            temp = *n1;
+            *n1 = *n2;
+            *n2 = temp;
+        }
+    }
+}
+// ************************ Lesson40_Pointers and Arrays ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = new int[] { 10, 20, 30, 40, 50 };
+
+            unsafe
+            {
+                Console.WriteLine("Array Adresss and Values are: ");
+                for (int i = 0; i < arr.Length; i++)
+                    fixed (int* p = &arr[i])
+                        Console.WriteLine("arr[{0}] Adrees: {1} Value: {2}", i, (int)p, *p);
+            }
+        }
+    }
+}
+// ************************ Lesson41_Pointers and Structure ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            unsafe
+            {
+                Student S1 = new Student(1, 95.0);
+                Student* S1_ptr = &S1;
+               
+                Console.WriteLine("Details of Student 1");
+                Console.WriteLine("Roll Number: {0} Marks: {1}",
+                                S1_ptr->rno, S1_ptr->marks);
+            }
+        }
+        struct Student
+        {
+            public int rno;
+            public double marks;
+
+            // Constructor to initialize values
+            public Student(int r, double m)
+            {
+                rno = r;
+                marks = m;
+            }
+        }
+    }
+}
+// ************************ Lesson42_Pointer to Void ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            unsafe
+            {
+                int a = 10;
+                void* ptr = &a;
+                cout << *(static_cast<int*>(ptr)) << endl;
+
+            }
+        }
+    }
+}
+// ************************ Lesson43_Memory Management_new and delete ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            unsafe
+            {
+                int* ptrX; // declare a float pointerfloat* ptrY; // dynamically allocate memory    ptrX = newint;     ptrY = newfloat; // assigning value to the memory    *ptrX = 45;     *ptrY = 58.35f;     cout << *ptrX << endl;     cout << *ptrY << endl; // deallocate the memorydelete ptrX; delete ptrY;
+
+            }
+        }
+    }
+}
+// ************************ Lesson44_Dynamic Arrays_new and delete ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter Total Number of Students: ");
+            int studentsNumber = int.Parse(Console.ReadLine());
+            int[] studentsMarks = new int[studentsNumber];
+            Console.WriteLine("Enter Grades of Students:");
+
+            for (int i = 0; i < studentsNumber; i++)
+            {
+                Console.Write("Student{0} :", (i+1));
+                studentsMarks[i] = int.Parse(Console.ReadLine());
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Displaying Grades of Stidents: ");
+            
+            for (int i = 0; i < studentsNumber; i++)
+            {
+                Console.WriteLine("Student{0} : {1}",(i+1),studentsMarks[i]);
+            }
+                
+        }
+    }
+}
+// ************************ Lesson46_Access Elements ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> nums = new List<int>() { 1, 2, 3, 4, 5 };
+
+            Console.WriteLine("Using ElementAt: ");
+            for(int i=0;i<nums.Count;i++)
+                Console.Write(nums.ElementAt(i) + " ");
+            
+            Console.WriteLine();
+            Console.WriteLine("*********************");
+
+            Console.WriteLine("Using i: ");
+            for (int i = 0; i < nums.Count; i++)
+                Console.Write(nums[i]+" ");
+
+            Console.WriteLine();
+        }
+    }
+}
+// ************************ LLesson47_Change Elements ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> nums = new List<int>() { 1, 2, 3, 4, 5 };
+
+            Console.WriteLine("Update Elements: ");
+            for(int i=0;i<nums.Count;i++)
+                nums[i] =10;
+                
+
+            
+            Console.WriteLine();
+            Console.WriteLine("*********************");
+
+            Console.WriteLine("Using i: ");
+            for (int i = 0; i < nums.Count; i++)
+                Console.Write(nums[i]+" ");
+
+            Console.WriteLine();
+        }
+    }
+}
+// ************************ Lesson48_Vector Iterators ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            unsafe
+            {
+                int[] list = { 5, 25 };
+                fixed (int* ptr = list)
+
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Console.WriteLine("Address of list[{0}]={1}", i, (int)(ptr + i));
+                        Console.WriteLine("Value of list[{0}]={1}", i, *(ptr + i));
+                    }
+            }
+        }
+    }
+}
+// ************************ Lesson49_Try Catch ***********************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numbers = new int[] { 1, 2, 3, 4, 5 };
+
+            try
+            {
+                Console.WriteLine(numbers[5]);
+            }
+            catch
+            {
+                Console.WriteLine("out of bound");
+            }
+        }
+    }
+}
+// ************************ Lesson50_String Object(Common Methods) ***********************
+using System;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string s1 = "My Name is Saleem, I Love Programming.";
+
+            Console.WriteLine(s1.Length);
+
+            Console.WriteLine(s1.ElementAt(3));
+
+            StringBuilder s = new StringBuilder(s1);
+            s.Append(" @Programming Advices.");
+            Console.WriteLine(s);
+
+            Console.WriteLine(s1.Insert(17, " Kassab"));
+
+            Console.WriteLine(s1.Substring(11, 6));
+
+            StringBuilder s2 = new StringBuilder(s1);
+            s2.Append("X");
+            Console.WriteLine(s2);
+
+            Console.WriteLine(s1.Remove(s1.Length - 1));
+
+            Console.WriteLine(s1.IndexOf("Saleem"));
+            if (s1.IndexOf("saleem") == -1)
+                Console.WriteLine("saleem is not found!");
+
+            s1 = String.Empty;
+            Console.WriteLine(s1);
+        }
+    }
+}
+// ************************ Lesson51_Some CCTYPE Functions ***********************
+using System;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("a".ToUpper());
+            Console.WriteLine("a".ToLower());
+            Console.WriteLine(Char.IsUpper('a'));
+            Console.WriteLine(Char.IsLower('a'));
+            Console.WriteLine(Char.IsDigit('0'));
+            Console.WriteLine(Char.IsPunctuation(';'));
+
+        }
+    }
+}
+// ************************ Lesson52_Write Mode_Write Data To Files ***********************
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamWriter file = new StreamWriter("myFile.txt");
+            file.WriteLine("First Line");
+            file.WriteLine("Secound Line");
+            file.WriteLine("Third Line");
+            file.Close();
+        }
+    }
+}
+// ************************ Lesson53_Append Mode_Append Data to File ***********************
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamWriter file = new StreamWriter("myFile.txt", append: true);
+            file.WriteLine("First Line");
+            file.WriteLine("Secound Line");
+            file.WriteLine("Third Line");
+            file.Close();
+        }
+    }
+}
+// ************************ Lesson54_Read Mode_Print File Content  ***********************
+  static void printFileContent(string filePath)
+        {
+            foreach (string line in File.ReadLines(filePath))
+                Console.WriteLine(line);
+        }
+// ************************ Lesson55_Load Data From File to Vector  ***********************
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            updateFileContent("myFile.txt",0,"Nassem");
+        }
+        static void updateFileContent(string filePath, int lineIndex, string newLine)
+        {
+            List<string> fileContentList = fillListFromFile(filePath);
+
+            fileContentList = updateFileList(fileContentList, lineIndex, newLine);
+
+            StreamWriter file = new StreamWriter(filePath);
+
+            foreach (string line in fileContentList)
+                file.WriteLine(line);
+
+            file.Close();
+        }
+        static List<string> fillListFromFile(string filePath)
+        {
+            List<string> fileContent = new List<string>();
+            foreach (string line in File.ReadLines(filePath))
+                fileContent.Add(line);
+
+            return fileContent;
+        }
+        static List<string> updateFileList(List<string> fileContentList, int lineindex, string newLineContent)
+        {
+            fileContentList[lineindex] = newLineContent;
+            return fileContentList;
+        }
+    }
+}
+// ************************ Lesson56_Save Vector to File  ***********************
+ static void updateFileContent(string filePath, int lineIndex, string newLine)
+        {
+            List<string> fileContentList = fillListFromFile(filePath);
+
+            fileContentList = updateFileList(fileContentList, lineIndex, newLine);
+
+            StreamWriter file = new StreamWriter(filePath);
+
+            foreach (string line in fileContentList)
+                file.WriteLine(line);
+
+            file.Close();
+        }
+// ************************ Lesson57_Delete Record From File  ***********************
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //updateFileContent("myFile.txt",0,"Nassem");
+            delteFileContent("myFile.txt", 1);
+        }
+        static void updateFileContent(string filePath, int lineIndex, string newLine)
+        {
+            List<string> fileContentList = fillListFromFile(filePath);
+
+            fileContentList = updateFileList(fileContentList, lineIndex, newLine);
+
+            StreamWriter file = new StreamWriter(filePath);
+
+            foreach (string line in fileContentList)
+                file.WriteLine(line);
+
+            file.Close();
+        }
+        static void delteFileContent(string filePath, int lineIndex)
+        {
+            List<string> fileContentList = fillListFromFile(filePath);
+
+            fileContentList = deleteFileList(fileContentList, lineIndex);
+
+            StreamWriter file = new StreamWriter(filePath);
+
+            foreach (string line in fileContentList)
+                file.WriteLine(line);
+
+            file.Close();
+        }
+        static List<string> fillListFromFile(string filePath)
+        {
+            List<string> fileContent = new List<string>();
+            foreach (string line in File.ReadLines(filePath))
+                fileContent.Add(line);
+
+            return fileContent;
+        }
+        static List<string> updateFileList(List<string> fileContentList, int lineindex, string newLineContent)
+        {
+            fileContentList[lineindex] = newLineContent;
+            return fileContentList;
+        }
+        static List<string> deleteFileList(List<string> fileContentList, int lineindex)
+        {
+            fileContentList.RemoveAt(lineindex);
+            return fileContentList;
+        }
+    }
+}
+// ************************ Lesson59_Datetime Local_UTC Time  ***********************
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(DateTime.Now);
+            Console.WriteLine(DateTime.UtcNow);
+        }
+    }
+}
+// ************************ Lesson60_Datetime Structure  ***********************
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace lab
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(DateTime.Now.Year);
+            Console.WriteLine(DateTime.Now.Month);
+            Console.WriteLine(DateTime.Now.Day);
+            Console.WriteLine(DateTime.Now.Hour);
+            Console.WriteLine(DateTime.Now.Minute);
+            Console.WriteLine(DateTime.Now.Second);
+            Console.WriteLine((int)DateTime.Now.DayOfWeek);
+            Console.WriteLine((int)DateTime.Now.DayOfYear);
+        }
+    }
+}
+
